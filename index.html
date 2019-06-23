@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="queue.js"></script>
+</head>
+<body>
+<div>123</div>
+</body>
+<script>
+    function random(min = 500, max = 1000) {
+        return parseInt(Math.random() * (max - min + 1) + min)
+    }
+
+    function asyncFun(x) {
+        //let timestamps = random()
+        // console.log(x +', 等待时间: ', timestamps + 'ms')
+        return new Promise((res, rej) => {
+            setTimeout(function () {
+                res(x)
+            }, 1000)
+            //timestamps
+        })
+    }
+
+    let queue = new Queue({
+        requests: 10
+    })
+
+    for (let i = 0; i < 10; i++) {
+        queue.add(asyncFun('元素' + i))
+    }
+
+</script>
+</html>
